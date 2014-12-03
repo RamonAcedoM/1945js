@@ -1,0 +1,20 @@
+body{
+  background-color: #000;
+  color: white;
+  font-family: "Tahoma";
+}
+span{
+  display: block;
+  float: left;
+  font-size: 18px;
+  font-weight: bold;
+  width: 100%;
+  text-align: left;
+}
+canvas{
+  display: block;
+  margin: 0 auto;
+  background-color: #333;
+  float: left;
+}
+
