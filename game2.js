@@ -53,7 +53,7 @@ resources.onReady(init);
 // Game state
 var player = {
     pos: [0, 0],
-    sprite: new Sprite('1945.png', [332,33], [46, 36], 16, [0, 1])
+    sprite: new Sprite('1945.png', Sprite.player.pos, Sprite.player.size, 16, [0, 1])
 };
 
 var bullets = [];

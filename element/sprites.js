@@ -46,3 +46,40 @@
       0, 0,
       this.size[0], this.size[1]);
   };
+
+// variables estaticas para un uso mas facil de las cordenadas
+
+Sprite.player = {
+  pos: [332, 33],
+  size: [46, 36]
+};
+
+Sprite.bigLogo = {
+  pos: [2, 2],
+  size: [277, 140]
+};
+
+Sprite.barGreen = {
+  pos: [280,0],
+  size: [26,114]
+};
+
+Sprite.fireball = {
+  pos: [286, 119],
+  size: [12, 33]
+};
+
+Sprite.yellowAirplane = {
+  centerPropeller: {
+    pos: [335, 244],
+    size: [55, 41]
+  },
+  rightPropeller: {
+    pos: [401, 244],
+    size: [55, 41]
+  },
+  leftPropeller: {
+    pos: [599, 244],
+    size: [55, 41]
+  }
+};
