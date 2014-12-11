@@ -89,6 +89,9 @@ function update(dt) {
     handleInput(dt);
     updateEntities(dt);
 
+    // TODO: AQUI ESTA EL PEDAZO QUE HACE QUE APAREZCAN MÁS O MENOS ENEMIGOS, HAY QUE CAMBIARLO
+    //       DEPENDIENDO DEL PUNTAJE DEL JUGADOR
+  
     // It gets harder over time by adding enemies using this
     // equation: 1-.993^gameTime
     if(Math.random() < 1 - Math.pow(.993, gameTime)) {
@@ -103,6 +106,8 @@ function update(dt) {
               [0, 1, 2, 3, 4])
         });
     }
+    
+    
 
     checkCollisions();
 
@@ -125,7 +130,12 @@ function handleInput(dt) {
     if(input.isDown('RIGHT') || input.isDown('d')) {
         player.pos[0] += playerSpeed * dt;
     }
-
+    
+  
+    // ACCION DE DISPARAR SI PRESIONAS LA BARRA DE ESPACIO
+  
+    // TODO: REPRODUCIR SONIDO DE DISPARO
+  
     if(input.isDown('SPACE') &&
        !isGameOver &&
        Date.now() - lastFire > 100) {
@@ -236,6 +246,10 @@ function checkCollisions() {
                                        'vertical', 
                                        true)
                 });
+              
+                // IGNORA LA VARIABLE SIN EL "VAR" LO PUSE PARA NO TENER QUE HACER EL ARREGLO
+                // DE SONIDOS Y NO TENER QUE HACER UN SPLICE AL MISMO PARA ELIMINARLOS DE MEMORIA
+                // SIMPLEMENTE HAGO UN "DELETE" DEL MISMO
                 explo = new Audio("sounds/explosion.wav");
                 explo.play();
                 delete explo;
