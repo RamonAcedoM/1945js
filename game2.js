@@ -70,7 +70,7 @@ var lastFire = Date.now();
 var gameTime = 0;
 var isGameOver;
 var terrainPattern;
-
+var levelByScore = 1;
 var level = 1;
     var cont = 1;
 
@@ -88,13 +88,46 @@ function update(dt) {
 
     handleInput(dt);
     updateEntities(dt);
-
     // TODO: AQUI ESTA EL PEDAZO QUE HACE QUE APAREZCAN MÁS O MENOS ENEMIGOS, HAY QUE CAMBIARLO
     //       DEPENDIENDO DEL PUNTAJE DEL JUGADOR
-  
     // It gets harder over time by adding enemies using this
     // equation: 1-.993^gameTime
-    if(Math.random() < 1 - Math.pow(.993, gameTime)) {
+
+    switch(score) {
+      case 0:
+        levelByScore = 5;
+        level = 1;
+        document.getElementById('level').style.display = 'block';
+        document.getElementById('level').innerHTML = 'Level ' + level;
+        break;
+      case 2000:
+        levelByScore = 10;
+        level = 2;
+        document.getElementById('level').style.display = 'block';
+        document.getElementById('level').innerHTML = 'Level ' + level;
+        break;
+      case 9500:
+        levelByScore = 15;
+        level = 3;
+        document.getElementById('level').style.display = 'block';
+        document.getElementById('level').innerHTML = 'Level ' + level;
+        break;
+      case 15000:
+        levelByScore = 20;
+        level = 4;
+        document.getElementById('level').style.display = 'block';
+        document.getElementById('level').innerHTML = 'Level ' + level;
+        break;
+      case 35000:
+        levelByScore = 25;
+        level = 5;
+        document.getElementById('level').style.display = 'block';
+        document.getElementById('level').innerHTML = 'Level ' + level;
+        break;
+      default:
+        break;
+    }
+    if(Math.random() < 1 - Math.pow(.993, levelByScore)) {
         enemies.push({
             pos: [canvas.width,
                   Math.random() * (canvas.height - 39)],
@@ -328,6 +361,7 @@ function gameOver() {
 function reset() {
     document.getElementById('game-over').style.display = 'none';
     document.getElementById('game-over-overlay').style.display = 'none';
+    document.getElementById('level').style.display = 'none';
     isGameOver = false;
     gameTime = 0;
     score = 0;
