@@ -174,7 +174,6 @@ function handleInput(dt) {
        Date.now() - lastFire > 100) {
         var x = player.pos[0] + player.sprite.size[0] / 2;
         var y = player.pos[1] + player.sprite.size[1] / 2;
-      
         bullets.push({ 
           pos: [x, y],
           dir: 'forward',
@@ -182,6 +181,10 @@ function handleInput(dt) {
         });
 
         lastFire = Date.now();
+        var shootS = new Audio('sounds/shoot2.wav');
+        shootS.volume = 0.2;
+        shootS.play();
+        delete shootS
     }
 }
 
