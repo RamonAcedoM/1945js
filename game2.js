@@ -70,8 +70,8 @@ var lastFire = Date.now();
 var gameTime = 0;
 var isGameOver;
 var terrainPattern;
-var levelByScore = 1;
-var level = 1;
+var levelByScore = 0;
+var level = 0;
     var cont = 1;
 
 var score = 0;
@@ -92,36 +92,42 @@ function update(dt) {
     //       DEPENDIENDO DEL PUNTAJE DEL JUGADOR
     // It gets harder over time by adding enemies using this
     // equation: 1-.993^gameTime
-
+    document.getElementById('level').style.display = 'block';
     switch(score) {
       case 0:
         levelByScore = 5;
         level = 1;
-        document.getElementById('level').style.display = 'block';
+        enemySpeed = 100;
         document.getElementById('level').innerHTML = 'Level ' + level;
         break;
-      case 2000:
+      case 1500:
         levelByScore = 10;
         level = 2;
-        document.getElementById('level').style.display = 'block';
+        enemySpeed = 150;
         document.getElementById('level').innerHTML = 'Level ' + level;
         break;
-      case 9500:
-        levelByScore = 15;
+      case 7500:
+        levelByScore = 13;
         level = 3;
-        document.getElementById('level').style.display = 'block';
+        enemySpeed = 200;
         document.getElementById('level').innerHTML = 'Level ' + level;
         break;
       case 15000:
-        levelByScore = 20;
+        levelByScore = 16;
         level = 4;
-        document.getElementById('level').style.display = 'block';
+        enemySpeed = 310;
+        document.getElementById('level').innerHTML = 'Level ' + level;
+        break;
+      case 22000:
+        levelByScore = 18;
+        level = 5;
+        enemySpeed = 400;
         document.getElementById('level').innerHTML = 'Level ' + level;
         break;
       case 35000:
-        levelByScore = 25;
-        level = 5;
-        document.getElementById('level').style.display = 'block';
+        levelByScore = 21;
+        level = 6;
+        enemySpeed = 500;
         document.getElementById('level').innerHTML = 'Level ' + level;
         break;
       default:
