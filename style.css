@@ -12,9 +12,49 @@ span{
   text-align: left;
 }
 canvas{
+  position: absolute;
+  left: 0;
+  right: 0;
   display: block;
   margin: 0 auto;
   background-color: #333;
-  float: left;
+}
+#game-over{
+  position: absolute;
+  width: 512px;
+  height: 480px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 10;
+}
+#game-over-overlay{
+  background-color: black;
+  opacity: 0.5;
+  position: absolute;
+  width: 512px;
+  height: 480px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 9;
+}
+.game-over-text{
+  font-size: 60px;
+  text-align: center;
+  
+}
+
+#play-again{
+  position: absolute;
+  background: none;
+  font-size: 30px;
+  color: green;
+  display: block;
+  margin: 0 auto;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+  text-transform: uppercase;
 }
 

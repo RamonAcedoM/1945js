@@ -32,13 +32,17 @@ function main() {
     requestAnimFrame(main);
 };
 
+SoundJS.addBatch([
+  { name: "shoot", src:"../sounds/shoot2.wav", instances: 1}
+]);
+
 function init() {
-    terrainPattern = ctx.createPattern(resources.get('1945.png'), 'repeat');
+    terrainPattern = ctx.createPattern(resources.get('space_pattern.png'), 'repeat');
 
     document.getElementById('play-again').addEventListener('click', function() {
         reset();
     });
-
+    
     reset();
     lastTime = Date.now();
     main();
@@ -46,14 +50,19 @@ function init() {
 
 resources.load([
     '1945.png',
-    'explosions.png'
+    'explosions.png',
+    'bullets.png',
+    'space_pattern.png',
+    'asteroids.png',
+    'player_sprites.png'
 ]);
+
 resources.onReady(init);
 
 // Game state
 var player = {
     pos: [0, 0],
-    sprite: new Sprite('1945.png', [332,33], [46, 36], 16, [0, 1])
+    sprite: new Sprite('player_sprites.png', [0,0], [40, 38], 16, [0, 1, 2, 3], 'vertical')
 };
 
 var bullets = [];
@@ -64,6 +73,9 @@ var lastFire = Date.now();
 var gameTime = 0;
 var isGameOver;
 var terrainPattern;
+
+var level = 1;
+    var cont = 1;
 
 var score = 0;
 var scoreEl = document.getElementById('score');
@@ -87,11 +99,11 @@ function update(dt) {
             pos: [canvas.width,
                   Math.random() * (canvas.height - 39)],
             sprite: new Sprite(
-              '1945.png',
-              [0, 78], 
-              [80, 39],
-              6, 
-              [0, 1, 2, 3, 2, 1])
+              'asteroids.png',
+              [0, 0], 
+              [72, 72],
+              16, 
+              [0, 1, 2, 3, 4])
         });
     }
 
@@ -123,25 +135,23 @@ function handleInput(dt) {
         var x = player.pos[0] + player.sprite.size[0] / 2;
         var y = player.pos[1] + player.sprite.size[1] / 2;
 
-        bullets.push({ pos: [x, y],
-                       dir: 'forward',
-                       sprite: new Sprite('1945.png', [0, 39], [18, 8]) });
-        bullets.push({ pos: [x, y],
-                       dir: 'up',
-                       sprite: new Sprite('1945.png', [0, 50], [9, 5]) });
-        bullets.push({ pos: [x, y],
-                       dir: 'down',
-                       sprite: new Sprite('1945.png', [0, 60], [9, 5]) });
+        SoundJS.play("shoot",SoundJS.INTERRUPT_ANY);
+      
+        bullets.push({ 
+          pos: [x, y],
+          dir: 'forward',
+          sprite: new Sprite('bullets.png', [0, 0], [6, 6]) 
+        });
 
         lastFire = Date.now();
     }
 }
 
 function updateEntities(dt) {
-    // Update the player sprite animation
+    // Actualizar el jugador
     player.sprite.update(dt);
 
-    // Update all the bullets
+    // Actualizar todas las balitas
     for(var i=0; i<bullets.length; i++) {
         var bullet = bullets[i];
 
@@ -218,6 +228,8 @@ function checkCollisions() {
                 // Add score
                 score += 100;
 
+                
+                
                 // Add an explosion
                 explosions.push({
                     pos: pos,
@@ -229,6 +241,9 @@ function checkCollisions() {
                                        'vertical', 
                                        true)
                 });
+                explo = new Audio("sounds/explosion.wav");
+                explo.play();
+                delete explo;
 
                 // Remove the bullet and stop this iteration
                 bullets.splice(j, 1);
@@ -292,6 +307,12 @@ function gameOver() {
     document.getElementById('game-over').style.display = 'block';
     document.getElementById('game-over-overlay').style.display = 'block';
     isGameOver = true;
+
+    if(cont == 1){
+      var death = new Audio("sounds/Death.wav");
+      death.play();
+      cont = cont - 1;
+    }
 }
 
 // Reset game to original state
