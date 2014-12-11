@@ -130,6 +130,24 @@ function update(dt) {
         enemySpeed = 500;
         document.getElementById('level').innerHTML = 'Level ' + level;
         break;
+      case 40000:
+        levelByScore = 24;
+        level = 7;
+        enemySpeed = 600;
+        document.getElementById('level').innerHTML = 'Level ' + level;
+        break;
+      case 45000:
+        levelByScore = 30;
+        level = 8;
+        enemySpeed = 700;
+        document.getElementById('level').innerHTML = 'Level ' + level;
+        break;
+      case 50000:
+        levelByScore = 33;
+        level = 9;
+        enemySpeed = 800;
+        document.getElementById('level').innerHTML = 'Level ' + level;
+        break;
       default:
         break;
     }

@@ -37,6 +37,16 @@ canvas{
   margin: auto;
   z-index: 8;
 }
+#score-name {
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 399px;
+  right: 30px;
+  margin: auto;
+  z-index: 8;
+  top: 420;
+}
 #game-over-overlay{
   background-color: black;
   opacity: 0.5;
