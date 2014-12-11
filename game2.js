@@ -32,9 +32,6 @@ function main() {
     requestAnimFrame(main);
 };
 
-SoundJS.addBatch([
-  { name: "shoot", src:"../sounds/shoot2.wav", instances: 1}
-]);
 
 function init() {
     terrainPattern = ctx.createPattern(resources.get('space_pattern.png'), 'repeat');
@@ -134,8 +131,6 @@ function handleInput(dt) {
        Date.now() - lastFire > 100) {
         var x = player.pos[0] + player.sprite.size[0] / 2;
         var y = player.pos[1] + player.sprite.size[1] / 2;
-
-        SoundJS.play("shoot",SoundJS.INTERRUPT_ANY);
       
         bullets.push({ 
           pos: [x, y],
